@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register - PurpleLink</title>
+    <!-- Link ke Font Awesome untuk ikon mata -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="auth-container">
+        <h2>Register</h2>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div style="color:red; margin-bottom: 15px; border: 1px solid red; padding: 10px; border-radius: 5px; background-color: #f8d7da;">
+                {{ messages[0] | safe }}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <!-- Input username sekarang dibungkus div agar konsisten -->
+            <div class="input-wrapper">
+                <input type="text" name="username" placeholder="Username" required>
+            </div>
+
+            <div class="password-wrapper">
+                <input type="password" name="password" placeholder="Password" required>
+                <i class="fa-solid fa-eye toggle-password"></i>
+            </div>
+
+            <div class="password-wrapper">
+                <input type="password" name="confirm_password" placeholder="Konfirmasi Password" required>
+                <i class="fa-solid fa-eye toggle-password"></i>
+            </div>
+            
+            <button type="submit">Register</button>
+        </form>
+
+        <!-- Daftar Persyaratan Password di bawah tombol -->
+        <div class="password-requirements">
+            <strong>Password harus memenuhi syarat:</strong>
+            <ul>
+                <li>Minimal 8 karakter</li>
+                <li>Mengandung huruf kecil (a-z)</li>
+                <li>Mengandung huruf kapital (A-Z)</li>
+                <li>Mengandung angka (0-9)</li>
+            </ul>
+        </div>
+        
+        <p style="text-align: center; margin-top: 20px;">Sudah punya akun? <a href="{{ url_for('auth.login') }}">Login</a></p>
+    </div>
+    <script>
+    document.querySelectorAll('.toggle-password').forEach(icon => {
+            icon.addEventListener('click', function () {
+                const passwordField = this.parentElement.querySelector('input');
+                const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordField.setAttribute('type', type);
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+        });
+    });
+    </script>
+</body>
+</html>

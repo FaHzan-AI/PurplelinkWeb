@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <!-- Link ke Font Awesome untuk ikon mata -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="auth-container">
+        <h2>Login</h2>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flashes" style="color: red; list-style-type: none; padding: 0; margin-bottom: 15px;">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <!-- Input username sekarang dibungkus div agar konsisten -->
+            <div class="input-wrapper">
+                <input type="text" name="username" placeholder="Username" required>
+            </div>
+            
+            <div class="password-wrapper">
+                <input type="password" name="password" placeholder="Password" required>
+                <i class="fa-solid fa-eye toggle-password"></i>
+            </div>
+            
+            <button type="submit">Login</button>
+        </form>
+        <p style="text-align: center; margin-top: 20px;">Belum punya akun? <a href="{{ url_for('auth.register') }}">Daftar di sini</a></p>
+    </div>
+    <script>
+    document.querySelectorAll('.toggle-password').forEach(icon => {
+            icon.addEventListener('click', function () {
+                const passwordField = this.parentElement.querySelector('input');
+                const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordField.setAttribute('type', type);
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+        });
+    });
+    </script>
+</body>
+</html>

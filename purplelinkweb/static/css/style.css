@@ -1,0 +1,455 @@
+/* General Body and Container Styling */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Mencegah scroll di level body */
+}
+
+.chat-view {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Mencegah scroll hanya di halaman chat */
+}
+
+body {
+    background: linear-gradient(to right top, #d1c4e9, #bbdefb, #e1bee7);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333333;
+}
+
+.main-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    flex-wrap: nowrap;
+}
+
+#sidebar-container {
+    padding: 0 !important;
+    width: 350px;
+    flex-shrink: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+#sidebar-container.collapsed {
+    width: 80px;
+}
+
+#main-content-container {
+    flex-grow: 1;
+    padding: 0 !important;
+}
+
+/* Auth Container Styling */
+.auth-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container h2 { text-align: center; margin-bottom: 25px; color: #4a148c; }
+.auth-container form input[type="text"], .auth-container form input[type="password"] { width: 100%; padding: 12px; background-color: #f8f9fa; border: 1px solid #ccc; color: #333; border-radius: 15px; }
+.input-wrapper, .password-wrapper { position: relative; display: flex; align-items: center; margin-bottom: 1.2rem; }
+.password-wrapper .toggle-password { position: absolute; right: 15px; cursor: pointer; color: #999; }
+.auth-container button { width: 100%; padding: 12px; border: none; border-radius: 5px; background-color: #7e57c2; color: white; font-size: 16px; cursor: pointer; margin-top: 10px; border-radius: 15px; }
+.auth-container button:hover { background-color: #673ab7; }
+.password-requirements { font-size: 0.85em; color: #6c757d; margin-top: 20px; padding-left: 20px; border-top: 1px solid #eee; padding-top: 15px; }
+
+
+/* Chat Card Styling */
+.chat-card {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.chat-card .card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 0;
+    min-height: 0;
+}
+
+#chat-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    height: 100%;
+}
+
+#welcome-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.list-group-item { background-color: transparent; border-color: rgba(126, 87, 194, 0.2); color: #333; }
+a.list-group-item:hover { background-color: rgba(224, 213, 237, 0.5); }
+#messages { flex-grow: 1; overflow-y: auto; padding: 15px; background-color: #f9f9f9; display: flex; flex-direction: column; gap: 10px; }
+.message-bubble { padding: 8px 14px; border-radius: 14px; max-width: 65%; word-wrap: break-word; line-height: 1.4; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); position: relative; }
+
+/* WARNA BARU: ABU-ABU CERAH UNTUK PESAN TERKIRIM */
+.message-bubble.sent { 
+    background-color: #e9ecef; /* Warna abu-abu cerah */
+    color: #212529; /* Warna teks gelap agar terbaca */
+    align-self: flex-end; 
+    padding: 10px 15px; 
+}
+
+.message-bubble.received { background-color: #ffffff; color: #333; align-self: flex-start; border: 1px solid #f1f1f1; padding: 10px 15px; }
+.message-bubble strong { display: block; font-size: 0.85em; margin-bottom: 3px; color: #b39ddb; }
+.message-bubble.received strong { color: #673ab7; }
+.message-body p { display: inline; margin: 0; word-break: break-word; }
+.message-meta { float: right; clear: both; margin-left: 15px; position: relative; bottom: -0.5em; white-space: nowrap; }
+
+/* WARNA TIMESTAMP BARU UNTUK PESAN TERKIRIM */
+.message-bubble.sent .message-meta .text-muted { 
+    color: #6c757d !important; 
+}
+
+/* ===== Sidebar Styling ===== */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    background-color: #f4f2f7;
+    border-right: 1px solid #e0dce6;
+    overflow-x: hidden;
+}
+
+.sidebar-header {
+    padding: 1rem 1rem; /* Padding dikurangi agar lebih seimbang */
+    border-bottom: 1px solid #e0dce6;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 73px; /* Atur tinggi minimum agar sama dengan header chat */
+    box-sizing: border-box; /* Memastikan padding termasuk dalam perhitungan tinggi */
+}
+
+#chat-header {
+    padding: 1rem 1.5rem; /* Padding disesuaikan untuk spasi visual yang lebih baik */
+    border-bottom: 1px solid #e0dce6;
+    flex-shrink: 0;
+    display: flex; /* Ditambahkan flex untuk perataan */
+    justify-content: space-between; /* Memposisikan elemen anak di ujung yang berlawanan */
+    align-items: center; /* Menengahkan semua item secara vertikal */
+    min-height: 73px; /* Menyamai tinggi header sidebar */
+    box-sizing: border-box; /* Memastikan padding termasuk dalam perhitungan tinggi */
+}
+
+.sidebar-header h5, .sidebar-header span {
+    white-space: nowrap;
+}
+
+#sidebar-toggle-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    color: #673ab7;
+    cursor: pointer;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+    padding: 0.9rem 1rem;
+    color: #444;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+    border-left: 4px solid transparent;
+    white-space: nowrap;
+}
+
+.sidebar-nav a:hover {
+    background-color: #e9e5f0;
+}
+
+.sidebar-nav a.active {
+    background-color: #e9e5f0;
+    color: #673ab7;
+    border-left-color: #673ab7;
+}
+
+.sidebar-nav a i {
+    width: 30px;
+    text-align: center;
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
+.sidebar-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+#sidebar-container.collapsed .sidebar-content {
+    display: none;
+}
+
+.sidebar-panel {
+    display: none;
+}
+
+.sidebar-panel.active {
+    display: block;
+}
+
+.sidebar-footer {
+    padding: 1rem;
+    border-top: 1px solid #e0dce6;
+    flex-shrink: 0;
+}
+
+.sidebar-footer a {
+    display: flex;
+    justify-content: center;
+}
+
+.sidebar-footer a i {
+    margin-right: 8px;
+}
+
+/* === Collapsed Sidebar Styles === */
+#sidebar-container.collapsed .sidebar-logo-text,
+#sidebar-container.collapsed .sidebar-nav span,
+#sidebar-container.collapsed .sidebar-footer span {
+    display: none;
+}
+
+#sidebar-container.collapsed .sidebar-nav a,
+#sidebar-container.collapsed .sidebar-footer a {
+    justify-content: center;
+}
+
+#sidebar-container.collapsed .sidebar-nav a i,
+#sidebar-container.collapsed .sidebar-footer a i {
+    margin-right: 0;
+}
+
+/* Chat Input Form */
+#chat-form {
+    margin-top: 15px;
+    padding: 10px;
+    flex-shrink: 0;
+}
+
+#emoji-menu {
+    position: absolute;
+    bottom: 50px;
+    border: 1px solid #ddd;
+    background: #fff;
+    padding: 8px;
+    border-radius: 6px;
+    max-width: 100%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.emoji {
+    font-size: 24px;
+    margin: 5px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+/* New Styles for Reply, Edit, Delete */
+.reply-context {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-left: 3px solid #0d6efd;
+    padding: 5px 8px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+.reply-context strong {
+    font-size: 0.9em;
+    color: #0d6efd;
+}
+.reply-context p {
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
+}
+
+.message-options-btn {
+    position: absolute;
+    top: 2px;
+    right: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #6c757d;
+    display: none;
+    padding: 2px 8px;
+    border-radius: 50%;
+    user-select: none;
+}
+.message-bubble:hover .message-options-btn {
+    display: block;
+}
+
+.options-menu {
+    position: absolute;
+    top: 25px;
+    right: 5px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 100;
+    display: none;
+}
+.options-menu a {
+    display: block;
+    padding: 8px 12px;
+    color: #212529;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+.options-menu a:hover {
+    background-color: #f8f9fa;
+}
+
+#reply-preview {
+    background: #f1f1f1;
+    padding: 8px;
+    border-radius: 5px 5px 0 0;
+    margin-bottom: -1px;
+    display: none;
+    position: relative;
+    border: 1px solid #ddd;
+    border-bottom: none;
+}
+#reply-preview p { margin: 0; font-size: 0.9em; }
+#cancel-reply-btn {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    user-select: none;
+}
+
+.edited-marker {
+    font-size: 0.75em;
+    color: #6c757d;
+}
+
+/* GAYA BARU UNTUK PRATINJAU GAMBAR DI BALASAN */
+.reply-image-preview {
+    max-height: 40px;
+    max-width: 40px;
+    border-radius: 4px;
+    object-fit: cover;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+/* Styling untuk preview gambar di chat */
+.image-preview {
+    max-width: 250px; /* Lebar maksimum preview */
+    max-height: 200px; /* Tinggi maksimum preview */
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 5px;
+    display: block;
+    border: 1px solid #eee;
+}
+
+/* Container untuk ikon file dan nama file */
+.file-message-container {
+    display: flex;
+    align-items: center;
+    background-color: #f7f7f7;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e9e9e9;
+}
+
+/* Styling untuk ikon file dari Font Awesome */
+.file-icon {
+    font-size: 2.5em; /* Ukuran ikon */
+    color: #6c757d; /* Warna ikon */
+    margin-right: 12px;
+}
+
+.file-message-container a {
+    font-weight: 500;
+    word-break: break-all; /* Agar nama file panjang tidak merusak layout */
+}
+
+.chat-separator {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.chat-separator span {
+    background-color: #cce7ff;
+    color: #004085;
+    padding: 5px 15px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: 500;
+}
+
+.chat-separator.unread-marker span {
+    background-color: #f8d7da;
+    color: #721c24;
+    width: 100%;
+    border-radius: 0;
+}
+
+.online-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #28a745; /* green */
+    border-radius: 50%;
+    margin-left: 8px;
+}
+
+#all-users-list {
+    max-height: 200px; /* Atur ketinggian maksimum */
+    overflow-y: auto; /* Tambahkan scroll vertikal */
+    border: 1px solid #dee2e6;
+    border-radius: .25rem;
+}
+
+#group-members-list {
+    font-size: 0.8rem; /* Ukuran font lebih kecil */
+    color: #6c757d;    /* Warna abu-abu tua (Bootstrap's text-muted) */
+    margin-top: -5px;  /* Sedikit menaikkan posisi agar lebih dekat dengan nama grup */
+    max-width: 400px;  /* Batasi lebar agar tidak terlalu panjang */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Tampilkan "..." jika nama terlalu panjang */
+}
